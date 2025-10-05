@@ -1,0 +1,132 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #1e1e1e;
+  margin: 0;
+  padding: 0;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 675px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #000000;
+  border-radius: 24px;
+}
+
+.bento-item {
+  background: #d6c7b4;
+  border-radius: 16px;
+  padding: 24px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  color: #000000;
+}
+
+/* Effets au survol */
+.bento-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Header - Pleine largeur */
+.item1 {
+  grid-area: 1 / 1 / 2 / 11;
+  /* Navigation */
+}
+
+/* Projets - Grande section gauche */
+.item2 {
+  grid-area: 2 / 1 / 6 / 5;
+  /* Projets */
+}
+
+/* Photo Pro - Section centrale */
+.item3 {
+  grid-area: 2 / 5 / 6 / 7;
+  background: url(images/quiestcebeaugosse.jpg) center/cover no-repeat;
+  /* Photo Pro */
+}
+
+/* Parcours Pro - Section droite */
+.item4 {
+  grid-area: 2 / 7 / 7 / 11;
+  /* Parcours Pro */
+}
+
+/* Présentation - Bas gauche */
+.item5 {
+  grid-area: 6 / 1 / 9 / 4;
+  /* Présentation */
+}
+
+/* Contact - Bas centre */
+.item6 {
+  grid-area: 6 / 4 / 9 / 7;
+  /* Contact */
+}
+
+/* Réseaux sociaux - Bas droite */
+.item7 {
+  grid-area: 7 / 7 / 9 / 11;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.item7 a {
+  text-decoration: none;
+}
+
+.icon-hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #333;
+  font-size: 26px;
+  position: relative;
+}
+
+.icon-hover .text,
+.icon-hover .icon {
+  position: absolute;
+  left: 0;
+  transition: opacity 0.4s ease;
+}
+
+.icon-hover .icon {
+  opacity: 0;
+  font-size: 32px;
+  
+}
+
+.icon-hover:hover .text {
+  opacity: 0;
+}
+
+.icon-hover:hover .icon {
+  opacity: 1;
+}
+/* Réseaux sociaux */
+
+/* Media Query pour le responsive */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+
+  .bento-item {
+    grid-area: auto !important;
+    min-height: 200px;
+  }
+}
