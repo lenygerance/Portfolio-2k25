@@ -15,8 +15,8 @@ body {
   min-height: 675px;
   margin: 0 auto;
   padding: 24px;
-  background: #000000;
   border-radius: 24px;
+  background: #000000;
 }
 
 .bento-item {
@@ -35,48 +35,145 @@ body {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Header - Pleine largeur */
+/* Header / Navbar - Pleine largeur */
 .item1 {
   grid-area: 1 / 1 / 2 / 11;
-  /* Navigation */
+  
 }
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+header .logo:hover {
+  color: #555;
+}
+
+.navbar {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar li a:hover,
+.navbar li a.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Header/ Navbar */
 
 /* Projets - Grande section gauche */
 .item2 {
   grid-area: 2 / 1 / 6 / 5;
-  /* Projets */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+
 }
+.item2-1 {
+  background: url(images/Desert_1.1.jpg) center/cover no-repeat;
+  border-radius: 16px;
+}
+
+.item2-2 {
+  background: url(images/omac_1.1.jpg) center/cover no-repeat;
+  border-radius: 16px;
+}
+
+.item2-3 {
+  background: url(images/logoSushi_1.1.jpg) center/cover no-repeat;
+  border-radius: 16px;
+}
+
+.item2-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+.glass-circle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border-radius: 50%;
+  
+}
+}
+
+/* Projets */
 
 /* Photo Pro - Section centrale */
 .item3 {
   grid-area: 2 / 5 / 6 / 7;
   background: url(images/quiestcebeaugosse.jpg) center/cover no-repeat;
-  /* Photo Pro */
+  
 }
+
+/* Photo Pro */
 
 /* Parcours Pro - Section droite */
 .item4 {
   grid-area: 2 / 7 / 7 / 11;
-  /* Parcours Pro */
+  
 }
+
+/* Parcours Pro */
 
 /* Présentation - Bas gauche */
 .item5 {
   grid-area: 6 / 1 / 9 / 4;
-  /* Présentation */
+  
 }
+/* Présentation */
 
 /* Contact - Bas centre */
 .item6 {
   grid-area: 6 / 4 / 9 / 7;
-  /* Contact */
+  
 }
+/* Contact */
 
 /* Réseaux sociaux - Bas droite */
 .item7 {
   grid-area: 7 / 7 / 9 / 11;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  column-gap: 120px;
+  justify-content: center;
   align-items: center;
 
 }
@@ -93,13 +190,14 @@ body {
   color: #333;
   font-size: 26px;
   position: relative;
-}
-
-.icon-hover .text,
-.icon-hover .icon {
+  
+.text,
+.icon {
   position: absolute;
   left: 0;
   transition: opacity 0.4s ease;
+}
+
 }
 
 .icon-hover .icon {
@@ -115,6 +213,7 @@ body {
 .icon-hover:hover .icon {
   opacity: 1;
 }
+
 /* Réseaux sociaux */
 
 /* Media Query pour le responsive */
