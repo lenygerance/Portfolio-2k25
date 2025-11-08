@@ -3,6 +3,7 @@ body {
   background: #1e1e1e;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;       /* Évite le scroll horizontal */
 }
 
 .bento-grid {
@@ -11,11 +12,12 @@ body {
   grid-template-rows: repeat(8, 1fr);
   gap: 16px;
   width: 100%;
-  max-width: 1200px;
+  height: 100vh;
   min-height: 675px;
-  margin: 0 auto;
-  padding: 24px;
-  border-radius: 24px;
+  margin: 0;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 0;
   background: #000000;
 }
 
@@ -38,41 +40,54 @@ body {
 /* Header / Navbar - Pleine largeur */
 .item1 {
   grid-area: 1 / 1 / 2 / 11;
-  
+  padding: 0;
 }
+
 header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32px;
+  height: 100%;
 }
 
 header .logo {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  min-width: 150px;
 }
-header .logo:hover {
-  color: #555;
+
+header h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  flex: 1;
+  padding: 0 20px;
 }
 
 .navbar {
   list-style: none;
   display: flex;
-  gap: 24px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 32px;
   margin: 0;
   padding: 0;
+  min-width: 450px;
 }
 
 .navbar li a {
   text-decoration: none;
   color: #333;
-  font-weight: bold;
-  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 16px;
   border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .navbar li a:hover,
@@ -81,7 +96,7 @@ header .logo:hover {
   color: #fff;
 }
 
-/* Header/ Navbar */
+/* Header/ Navbar fin */
 
 /* Projets - Grande section gauche */
 .item2 {
@@ -134,7 +149,76 @@ header .logo:hover {
 }
 }
 
-/* Projets */
+/* Projets fin */
+
+/* état full-screen pour la zone projets */
+.item2.full-view {
+  grid-area: 2 / 1 / 9 / 11; /* s'assure de couvrir tout sous le header */
+  z-index: 200;
+  position: relative;
+}
+
+/* cacher les autres sections du grid */
+.bento-item.hidden {
+  display: none !important;
+}
+
+/* dans item2, cacher les vignettes non actives */
+.item2.single-active > a:not(.expanded) {
+  display: none;
+}
+
+/* élément cliqué : remplir tout item2 */
+.item2 > a.expanded {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 210;
+  transform-origin: center;
+  transition: transform 260ms ease, box-shadow 260ms ease;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* léger zoom pour le visuel */
+.item2 > a.expanded img,
+.item2 > a.expanded {
+  transform: scale(1.02);
+}
+
+/* bouton fermer */
+.projets-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 400;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  color: #111;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* petites transitions */
+.item2 > a {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* accessible sur mobile : ajustements */
+@media (max-width: 768px) {
+  .item2.full-view {
+    grid-area: 2 / 1 / 9 / 11;
+  }
+  .projets-close {
+    top: 12px;
+    right: 12px;
+    padding: 6px 10px;
+  }
+}
 
 /* Photo Pro - Section centrale */
 .item3 {
@@ -143,75 +227,90 @@ header .logo:hover {
   
 }
 
-/* Photo Pro */
+/* Photo Pro fin*/
 
 /* Parcours Pro - Section droite */
 .item4 {
   grid-area: 2 / 7 / 7 / 11;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
   
 }
 
-/* Parcours Pro */
+.item4-1{
+height: 120px;
+
+}
+
+/* Parcours Pro fin*/
 
 /* Présentation - Bas gauche */
 .item5 {
   grid-area: 6 / 1 / 9 / 4;
   
 }
-/* Présentation */
+/* Présentation fin*/
 
 /* Contact - Bas centre */
 .item6 {
   grid-area: 6 / 4 / 9 / 7;
   
 }
-/* Contact */
+/* Contact fin */
 
 /* Réseaux sociaux - Bas droite */
 .item7 {
   grid-area: 7 / 7 / 9 / 11;
   display: flex;
-  flex-direction: row-reverse;
-  column-gap: 120px;
   justify-content: center;
   align-items: center;
-
+  gap: 120px;
+  column-gap: 120px;
+  
 }
+
 
 .item7 a {
-  text-decoration: none;
+    color: #000000;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    list-style: none;
 }
 
+/* Aligne l'icône et le texte à l'intérieur du lien */
 .icon-hover {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  color: #333;
-  font-size: 26px;
-  position: relative;
-  
-.text,
-.icon {
-  position: absolute;
-  left: 0;
-  transition: opacity 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    position: relative;
 }
 
+.icon-hover .text {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: transform 0.3s ease;
 }
 
 .icon-hover .icon {
-  opacity: 0;
-  font-size: 32px;
-  
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-size: 2.2rem;
 }
 
 .icon-hover:hover .text {
-  opacity: 0;
+    transform: translateY(-20px);
+    opacity: 0;
 }
 
 .icon-hover:hover .icon {
-  opacity: 1;
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
 }
 
 /* Réseaux sociaux */
@@ -228,4 +327,153 @@ header .logo:hover {
     grid-area: auto !important;
     min-height: 200px;
   }
+}
+
+/* Présentation de la section cursus (item4) */
+.item4 {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 260px; /* augmente si nécessaire */
+  overflow: hidden;
+  background: linear-gradient(180deg, #e9ded3 0%, #d6c7b4 100%);
+  color: #111;
+  border-radius: 12px;
+}
+
+/* Colonne texte */
+.item4-content {
+  flex: 1 1 60%;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 8px;
+}
+
+.item4-content h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.item4-content h4 { margin: 12px 0 6px; font-size: 0.95rem; }
+.item4-content p { margin: 6px 0; line-height: 1.35; }
+.item4-content .muted { color: rgba(0,0,0,0.6); font-size: 0.9rem; }
+
+/* Colonne photos (scroll vertical si beaucoup d'images) */
+.item4-photos {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 100%;
+  overflow-y: auto; /* scroll vertical */
+  padding-left: 4px;
+  box-sizing: border-box;
+}
+
+/* vignette photo */
+.item4-photos .photo,
+.item4-photos img.photo {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* garde le ratio et remplit la vignette */
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* scrollbar styling optionnelle */
+.item4-photos::-webkit-scrollbar { width: 8px; }
+.item4-photos::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 8px; }
+
+/* Si le texte dépasse, on veut aussi un scroll agréable */
+.item4-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.item4-content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+
+/* Responsive : empilement sur petits écrans, photos en scroll horizontal */
+@media (max-width: 768px) {
+  .item4 {
+    flex-direction: column;
+  }
+  .item4-photos {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    padding-left: 0;
+  }
+  .item4-photos .photo {
+    min-width: 200px;
+    height: 140px;
+    flex: 0 0 auto;
+  }
+  .item4-content { max-height: none; }
+}
+
+/* item4 : liste d'éléments cursus image + texte */
+.item4 {
+  padding: 16px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #e9ded3 0%, #d6c7b4 100%);
+  border-radius: 12px;
+  color: #111;
+}
+
+/* conteneur scrollable des entrées */
+.cursus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 420px;    /* ajuste selon besoin */
+  overflow-y: auto;     /* scroll vertical si nécessaire */
+  padding-right: 8px;
+}
+
+/* une entrée image + texte */
+.cursus-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.04);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* image fixe à gauche */
+.cursus-photo {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex: 0 0 200px;
+}
+
+/* texte associé */
+.cursus-text {
+  flex: 1 1 auto;
+}
+
+/* typographie */
+.cursus-text h3,
+.cursus-text h4 {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+}
+.cursus-text p { margin: 6px 0; line-height: 1.4; }
+.cursus-text .muted { color: rgba(0,0,0,0.6); font-size: 0.95rem; }
+
+/* scrollbar légère (WebKit) */
+.cursus-list::-webkit-scrollbar { width: 8px; }
+.cursus-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+
+/* responsive : empiler image + texte sur petits écrans */
+@media (max-width: 768px) {
+  .cursus-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cursus-photo {
+    width: 100%;
+    height: 160px;
+    flex: 0 0 auto;
+  }
+  .cursus-list { max-height: none; }
 }
